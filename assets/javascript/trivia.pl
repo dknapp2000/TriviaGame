@@ -1,33 +1,66 @@
-
+# var qlist = [ { 'question': 'Name the largest freshwater lake in the world?',
+# 		   'aPointer': 1,
+# 		   'answers': [ 'Random answer 1',
+# 		                'Lake Superior',
+# 			        'Random answer 2',
+# 			        'Random answer 4' ]
+# 		 },
+# 	      { 'question': 'Where would you find the sea of tranqility?',
+# 	            'aPointer': 3,
+# 		    'answers': [ 'Random answer 1',
+# 		                 'Random answer 2',
+# 				 'Random answer 3',
+# 				 'The moon' ]
+# 		  }
+# 	    ];
+# 
+# console.log( qlist );
+# 
+# console.log( '-------------------------------');
+# 
+# console.log( qlist[1] );
+# 
+# console.log( qlist[1].question );
+# console.log( qlist[1].aPointer );
+# console.log( qlist[1].answers );
+# console.log( qlist[1].answers[ qlist[1].aPointer ] );
 use strict;
 my $i = 0;
 my @ans;
-my $rand = 1;
-print '[';
+my $rand = 0;
+print 'var qlist = [';
 
 while ( my $line = <DATA> ) {
     if ( $line =~ m/^\s*\<li\>(.*)<em>(.*)<\/em>/ ) {
         my $q = $1;
         my $a = $2;
         $q =~ s/(<em>|<\/em>)//g;
-	$q =~ s/\"/\'/g;
+	$q =~ s/\"//g;
+	$q =~ s/\'//g;
         $a =~ s/(<em>|<\/em>)//g;
         $a =~ s/[\.\s]*$//;
-	$a =~ s/\"/\'/g;
+	$a =~ s/\"]//g;
+	$a =~ s/\'//g;
 	my @rand = ( "Random answer 1", "Random answer 2", "Random answer 3", "Random answer 4" );
-	$rand[$rand++] = $a;
-	$rand = 1 if ( $rand == 4 );
-        print "  [ [$i], [\"$q\"], ";
+	$rand[$rand] = $a;
+        print "  { 'question': '$q',\n";
+        print "    'aPointer':  '$rand',\n";
+	print "    'answers': [ ";
 	for ( my $i = 0; $i<4; $i++ ) { 
-		print "[\"$rand[$i]\"]";
+		print "'$rand[$i]' ";
 		if ( $i < 3 ) { print ", " }
 	}
-	print " ], \n";
+	print " ] }, \n";
         $i++;
+	$rand++;
+	$rand = 0 if ( $rand == 4 );
+	# last if ( $i > 3 );
     }
 }
 
 print "];\n";
+
+print "console.log( qlist );\n";
 
 exit 0;
 __DATA__
@@ -90,8 +123,7 @@ __DATA__
     </li>
     <li>Which popular gardener created Barnsdale Gardens and was the author of many books such as <em>The Ornamental Kitchen Garden</em>, <em>'Gardeners World' Practical Gardening Course</em> and <em>Paradise Gardens</em>? <em>Geoff Hamilton.</em>
     </li>
-    <li>Which garden is considered to be among the Seven Wonders of the Ancient World? <em>T</em>
-        <em>he Hanging Gardens of Babylon.</em>
+    <li>Which garden is considered to be among the Seven Wonders of the Ancient World? <em>The Hanging Gardens of Babylon.</em>
     </li>
     <li>What colour is a Welsh poppy? <em>Yellow.</em>
     </li>

@@ -1,3 +1,24 @@
 body {
 	box-sizing: border-box;
+	color: navy;
+	background-color: aqua;
+}
+
+li {
+	font-size: 18pt;
+}
+
+#timerzone {
+	font-size: 18pt;
+}
+
+#scoreboard {
+	font-size: 16pt;
+}
+
+button {
+	height: 35px;
+	width: 75px;
+	color: black;
+	background-color: lightblue;
 }

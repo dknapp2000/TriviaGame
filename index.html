@@ -4,53 +4,48 @@
 <head>
     <title>Trivia!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <style>
-        .zone {
-            border: 1px solid red;
-        }
-    </style>
+    <script src="assets/javascript/nextQuestion.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-top">
-        <div class="container">
-            <div class="navbar-header">
-                <span class="sr-only">Toggle navigation</span>
-                <a class="navbar-brand" href="#">Project name</a>
-            </div>
-        </div>
-    </nav>
+
     <div class="container">
         <div class="row">
             <div class="starter-template">
                 <h1>Welcome to Total Trivia!</h1>
-                <p class="lead">Your chance to demonstract your awesome powers of trivialization</p>
+                <p class="lead">Your chance to demonstrate your awesome powers of trivialization</p>
             </div>
         </div>
     </div>
-
     <section class="container">
         <div class="row">
-            <div id="timerzone" class="zone col-md-offset-2 col-md-8 ">
-                <p>You have <span>##</span> seconds remaining.</p>        
+            <div id="timerzone" class="zone">
+                <p>You have <span id="seconds">20</span> seconds remaining to answer this question.</p>
+            </div>
+            <div id="reset">
+                <button id="restart" class="btn btn-info pull-right">Reset Game</button>
+                <button id="pause" class="btn btn-info pull-right">Pause Game</button>
             </div>
         </div>
         <div class="row">
-            <div id="questionzone" class="zone col-md-6 col-md-offset-2">
-                <p>Please answer the question</p>
+            <div id="questionzone" class="zone">
+                <h2 id="question">Please answer the question</h2>
+                <span id="answer" style="display: none !important;">This is the answer!</span>
+                <ol>
+                    <li id="a1" class="answers"></li>
+                    <li id="a2" class="answers"></li>
+                    <li id="a3" class="answers"></li>
+                    <li id="a4" class="answers"></li>
+                </ol>
             </div>
-
-            <div id="scoreboard" class="zone col-md-2">
-                <p>Correct: </p>
-                <p>Incorrect: </p>
-                <p>tTimed out:</p>
+            <div id="scoreboard" class="zone">
+                <p>Correct: <span id="correct">0</span></p>
+                <p>Incorrect: <span id="incorrect">0</span></p>
+                <p>Timed out: <span id="timedout">0</span></p>
+                <p>Total questions: <span id="totalquestions">0</span></p>
             </div>
         </div>
     </section>
