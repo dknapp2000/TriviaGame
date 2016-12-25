@@ -3,52 +3,43 @@
 
 <head>
     <title>Trivia!</title>
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Droid+Sans" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="assets/javascript/nextQuestion.js"></script>
     <script src="assets/javascript/app.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="row">
-            <div class="starter-template">
-                <h1>Welcome to Total Trivia!</h1>
-                <p class="lead">Your chance to demonstrate your awesome powers of trivialization</p>
-            </div>
+    <div class="banner card">
+        <h1>Welcome to Total Trivia!</h1>
+        <p class="lead">Your chance to demonstrate your awesome powers of trivialization</p>
+    </div>
+    <div class="timer card">
+        <div id="timerzone">
+            <p>You have <span id="seconds">20</span> seconds remaining to answer this question.</p>
+        </div>
+        <div id="reset">
+            <button id="restart" class="btn btn-info pull-right">Reset Game</button>
+            <button id="pause" class="btn btn-info pull-right">Pause Game</button>
         </div>
     </div>
-    <section class="container">
-        <div class="row">
-            <div id="timerzone" class="zone">
-                <p>You have <span id="seconds">20</span> seconds remaining to answer this question.</p>
-            </div>
-            <div id="reset">
-                <button id="restart" class="btn btn-info pull-right">Reset Game</button>
-                <button id="pause" class="btn btn-info pull-right">Pause Game</button>
-            </div>
-        </div>
-        <div class="row">
-            <div id="questionzone" class="zone">
-                <h2 id="question">Please answer the question</h2>
-                <span id="answer" style="display: none !important;">This is the answer!</span>
-                <ol>
-                    <li id="a1" class="answers"></li>
-                    <li id="a2" class="answers"></li>
-                    <li id="a3" class="answers"></li>
-                    <li id="a4" class="answers"></li>
-                </ol>
-            </div>
-            <div id="scoreboard" class="zone">
-                <p>Correct: <span id="correct">0</span></p>
-                <p>Incorrect: <span id="incorrect">0</span></p>
-                <p>Timed out: <span id="timedout">0</span></p>
-                <p>Total questions: <span id="totalquestions">0</span></p>
-            </div>
-        </div>
-    </section>
-    < </body>
+    <div id="questionzone" class="card">
+        <h2 id="question">Please answer the question</h2>
+        <span id="answer" style="display: none !important;">This is the answer!</span>
+        <ul>
+            <li id="a1" class="answers"></li>
+            <li id="a2" class="answers"></li>
+            <li id="a3" class="answers"></li>
+            <li id="a4" class="answers"></li>
+        </ul>
+    </div>
+    <div id="scoreboard" class="card">
+        <p>Correct: <span id="correct">0</span></p>
+        <p>Incorrect: <span id="incorrect">0</span></p>
+        <p>Timed out: <span id="timedout">0</span></p>
+        <p>Total questions: <span id="totalquestions">0</span></p>
+    </div>
+</body>
 
 </html>

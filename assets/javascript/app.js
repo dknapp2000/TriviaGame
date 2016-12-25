@@ -55,6 +55,7 @@ function gameReset() {
 	totalQuestions = 0;
 	timedOut = 0;
 	timerControl( "stop" );
+	resetUsedQuestions();
 	setupQuestion();
 }
 

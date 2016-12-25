@@ -1,24 +1,59 @@
 body {
 	box-sizing: border-box;
-	color: navy;
-	background-color: aqua;
+	color: #373737;
+	background-color: #dcd0c0;
+	width: 900px;
+	margin: auto;
+ 	background-size: cover;
+	font-family: 'Bree Serif', serif;
+	/* font-family: 'Droid Sans', sans-serif; */
 }
 
+.card {
+	background-color: #c0b283;
+	box-shadow: 0px 0px 10px #777;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-bottom: 15px;
+}
+
+.lead {
+	padding-bottom: 10px;
+}
+#scoreboard p {
+	display: inline-block;
+	margin: auto;
+	width: 20%;
+}
 li {
 	font-size: 18pt;
 }
 
+#reset {
+	align-content: center;
+	margin: auto;
+	border-radius: 3px;
+}
 #timerzone {
 	font-size: 18pt;
+	text-align: center;
 }
 
+#questionzone {
+	padding-bottom: 20px;
+}
 #scoreboard {
 	font-size: 16pt;
+	text-align: center;
+	height: 35px;
+	padding-top: 9px;
 }
 
 button {
+	display: inline-block;
 	height: 35px;
-	width: 75px;
-	color: black;
-	background-color: lightblue;
+	width: 40%;
+	background-color: #f4f4f4;
+	margin-bottom: 15px;
+	font-size: 16pt;
 }

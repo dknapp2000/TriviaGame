@@ -590,7 +590,9 @@ function nextQuestion() {
 	return qlist[qix];
 }
 
-
+function resetUsedQuestions() {
+  unedQuestions = [];
+}
 /*
 for ( var i = 0; i<qlist.length; i++ ) {
 
