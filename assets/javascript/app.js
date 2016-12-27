@@ -8,6 +8,7 @@ var ptrIncorrect;
 var ptrTimedOut;
 var ptrPause;
 var ptrReset;
+var ptrRoundCard;
 var timer; // = window.setInterval( updateTimer, 1000 );
 var secondsPerQuestion = 20;
 var secondsRemaining = secondsPerQuestion;
@@ -18,26 +19,27 @@ var incorrect = 0;
 var timedOut = 0;
 var totalQuestions = 0;
 var pauseTimer = false;
+var sndCorrect = new Audio( 'assets/sounds/correct.mp3');
+var sndInCorrect = new Audio( 'assets/sounds/incorrect.mp3');
 
 
 window.onload = function() {
-	console.log( "Window loaded");
+	// console.log( "Window loaded");
 	ptrQuestion = document.getElementById("question");
-	ptrA1 = document.getElementById("a1");
-	ptrA2 = document.getElementById("a2");
-	ptrA3 = document.getElementById("a3");
-	ptrA4 = document.getElementById("a4");
-	ptrTimer = document.getElementById("seconds");
-	// ptrTimer.innerHTML = secondsPerQuestion;
-	ptrAnswer = document.getElementById("answer");
-	ptrAnswers = document.getElementsByClassName("answers");
-	ptrCorrect = document.getElementById("correct");
+	ptrA1 =       document.getElementById("a1");
+	ptrA2 =       document.getElementById("a2");
+	ptrA3 =       document.getElementById("a3");
+	ptrA4 =       document.getElementById("a4");
+	ptrTimer =    document.getElementById("seconds");
+	ptrAnswer =   document.getElementById("answer");
+	ptrAnswers =  document.getElementsByClassName("answers");
+	ptrCorrect =  document.getElementById("correct");
 	ptrIncorrect = document.getElementById("incorrect");
 	ptrTimedOut = document.getElementById("timedout");
 	ptrTotalQuestions = document.getElementById("totalquestions");
-	ptrPause = document.getElementById( "pause" );
-	ptrReset = document.getElementById( "restart" );
-	console.log( ptrPause );
+	ptrPause =    document.getElementById( "pause" );
+	ptrReset =    document.getElementById( "restart" );
+    ptrRoundCard = document.getElementById( "roundcard" );
 	ptrPause.addEventListener( "click", function() { timerControl( "pause" ) } );
 	ptrReset.addEventListener( "click", gameReset );
 	setupQuestion();
@@ -79,7 +81,7 @@ function activateClicks() {
 }
 
 function deactivateClicks() {
-	console.log( "Deactivating cliker");
+	 console.log( "Deactivating cliker");
 	Array.from( ptrAnswers ).forEach( function( item ) {
 		item.removeEventListener( "click", answerSelected );
 	})
@@ -92,7 +94,7 @@ function timerControl( pAction ) {
 		window.clearInterval( timer );  // Ensure that the timer has stopped
 		timer = window.setInterval( updateTimer, 1000 );
 		pauseTimer = false;
-	} else if ( pAction === "stop " ) {
+	} else if ( pAction === "stop" ) {
 		window.clearInterval( timer );
 	} else if ( pAction === "pause" ) {
 		console.log( "Pausing timer: " + pauseTimer );
@@ -109,10 +111,26 @@ function answerSelected( item ) {
 	deactivateClicks();
 	if ( this.getAttribute( "data-correct" ) === 'Y' ) {
 		correct++;
+        sndCorrect.play();
+        pulseParent( ptrCorrect );
 	} else {
 		incorrect++;
+        sndInCorrect.play();
+        pulseParent( ptrIncorrect );
 	}
-	setupQuestion();
+    if ( totalQuestions >= questionsPerRound ) {
+        roundOver();
+    } else {
+	   setupQuestion();
+    }
+}
+
+function roundOver() {
+    console.log( "Round over." );
+    timerControl( "stop" );
+    ptrRoundCard.style.zIndex = 10;
+    ptrRoundCard.style.opacity = 1;
+    
 }
 
 function questionTimedOut() {
@@ -122,7 +140,7 @@ function questionTimedOut() {
 
 function setupQuestion() {
 	var question = nextQuestion();
-	console.log( question );
+	// console.log( question );
 	ptrQuestion.innerHTML = question.question;
 	ptrAnswer.innerHTML = question.aPointer;
 	ptrA1.innerHTML = question.answers[0];
@@ -141,4 +159,13 @@ function setupQuestion() {
 	activateClicks();
 	timerControl( "start" );
 }
+
+function pulseParent( pPtr ) {
+    var ptrParent = pPtr.parentElement;
+    console.log( pPtr );
+    console.log( ptrParent );
+    ptrParent.style.fontSize = "24pt";
+    setTimeout( function() { ptrParent.style.fontSize = "16pt" }, 100 )
+}
+
 
