@@ -134,6 +134,11 @@ function timerControl( pAction ) {
 	} else if ( pAction === "pause" ) {
 		console.log( "Pausing timer: " + pauseTimer );
 		pauseTimer = ! pauseTimer;
+        if ( pauseTimer ) {
+            ptrPause.innerHTML = "Resume Game"
+        } else {
+           ptrPause.innerHTML = "Pause Game" 
+        }
 	}
 }
 
@@ -176,7 +181,7 @@ function roundOver() {
     ptrRoundNumber.innerHTML = round;
     ptrRoundsWon.innerHTML = roundsWon;
     ptrRoundsLost.innerHTML = roundsLost;
-    ptrRoundScore.innerHTML = Math.round( ( roundRight / roundWrong ) * 100 );
+    ptrRoundScore.innerHTML = Math.round( ( roundRight / ( roundWrong + timedOut ) ) * 100 );
     pannelControl("show");
     roundRight = 0;
     roundWrong = 0;
