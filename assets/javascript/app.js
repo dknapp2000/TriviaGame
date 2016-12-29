@@ -34,7 +34,6 @@ var roundsLost = 0;
 
 
 window.onload = function() {
-	// console.log( "Window loaded");
 	ptrQuestion =  document.getElementById("question");
 	ptrA1 =        document.getElementById("a1");
 	ptrA2 =        document.getElementById("a2");
@@ -143,10 +142,6 @@ function timerControl( pAction ) {
 }
 
 function answerSelected( item ) {
-	console.log( "Answer Selected: " );
-	console.log( this );
-	console.log( this.getAttribute( "data-correct"));
-	// window.clearInterval( timer );
 	timerControl( "stop" );
 	deactivateClicks();
 	if ( this.getAttribute( "data-correct" ) === 'Y' ) {
@@ -202,7 +197,8 @@ function pannelControl( pAction ) {
     if ( totalQuestions >= questionsPerRound ) {
         roundOver();
     } else { 
-	   setupQuestion();
+        deactivateClicks();
+        setTimeout( function() { setupQuestion() }, 750 );
     }
 }
 
