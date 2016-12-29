@@ -178,6 +178,9 @@ function roundOver() {
     ptrRoundNumber.innerHTML = round;
     ptrRoundsWon.innerHTML = roundsWon;
     ptrRoundsLost.innerHTML = roundsLost;
+    console.log( "roundRight = " + roundRight );
+    console.log( "roundWrong = " + roundWrong );
+    console.log( "timedOut = " + timedOut );
     ptrRoundScore.innerHTML = Math.round( ( roundRight / ( roundWrong + timedOut ) ) * 100 );
     pannelControl("show");
     roundRight = 0;
@@ -194,7 +197,7 @@ function pannelControl( pAction ) {
     }
 }
 
-    function questionTimedOut() {
+function questionTimedOut() {
 	timedOut++;
     if ( totalQuestions >= questionsPerRound ) {
         roundOver();
