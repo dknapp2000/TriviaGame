@@ -148,11 +148,13 @@ function answerSelected( item ) {
         roundRight++;
 		correct++;
         sndCorrect.play();
+        ptrCorrect.innerHTML = correct;
         pulseParent( ptrCorrect );
 	} else {
         roundWrong++;
 		incorrect++;
         sndInCorrect.play();
+        ptrIncorrect.innerHTML = incorrect;
         pulseParent( ptrIncorrect );
 	}
     if ( totalQuestions >= questionsPerRound ) {
