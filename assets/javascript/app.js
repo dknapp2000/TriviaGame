@@ -163,7 +163,7 @@ function answerSelected( item ) {
     
     setTimeout( function() {
         answerColors("normal");
-    }, 1000 );
+    }, 750 );
     
     if ( totalQuestions >= questionsPerRound ) {
         setTimeout( roundOver, 750 );
