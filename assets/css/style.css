@@ -32,6 +32,17 @@ body {
 .lead {
 	padding-bottom: 10px;
 }
+
+.answers:hover {
+    color: darkred;
+}
+#question {
+    margin: 0px;
+}
+
+#categoryPara {
+    margin-top: 0px;
+}
 #scoreboard p {
 	display: inline-block;
 	margin: auto;
