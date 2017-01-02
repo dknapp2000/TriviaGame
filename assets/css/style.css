@@ -18,10 +18,10 @@ body {
 }
 
 #roundcard {
-    position: fixed;
+    position: relative;
     z-index: -100;
-    top: 100px;
-    left: 175px;
+    top: -500px;
+/*    left: 175px;*/
     height: 350px;
     width: 700px;
     margin: auto;
