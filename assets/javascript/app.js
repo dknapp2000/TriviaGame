@@ -33,6 +33,12 @@ var roundWrong = 0;
 var roundsWon = 0;
 var roundsLost = 0;
 
+/* onload grabs the pointers to the DOM objects that we'll be needing. 
+ * it also set us the needed event listeners.
+ * Finally, it calls out to loadQuestions which loads the
+ * questions with an ajax call then starts the game by 
+ * calling back to setUpQuestion()
+ */
 
 window.onload = function() {
 	ptrQuestion =  document.getElementById("question");
@@ -69,7 +75,7 @@ window.onload = function() {
 function pauseTimer() {
 	timerControl( "pause" );
 }
-
+// reset counters and start a new round.
 function continueGame() {
     pannelControl("hide");
     round++;
@@ -80,7 +86,7 @@ function continueGame() {
     setupQuestion();
 
 }
-
+// Reset the whole game, clearing the uesd questions flags.
 function gameReset() {
 	round = 1
 	correct = 0;
@@ -92,7 +98,7 @@ function gameReset() {
     pannelControl("hide");
 	setupQuestion();
 }
-
+// This is a callback to that updates the timer value on the page
 function updateTimer() {
 	if ( ! pauseTimer ) {
 		secondsRemaining--;		
@@ -106,7 +112,7 @@ function updateTimer() {
         questionTimedOut();
 	}
 }
-
+// Activates the click events on the answers
 function activateClicks() {
 	console.log( "Activating clicker")
 	Array.from( ptrAnswers ).forEach( function( item ) {
@@ -114,14 +120,16 @@ function activateClicks() {
 		item.addEventListener( "click", answerSelected );
 	});
 }
-
+// Deactivates the click events on the answers
 function deactivateClicks() {
 	 console.log( "Deactivating cliker");
 	Array.from( ptrAnswers ).forEach( function( item ) {
 		item.removeEventListener( "click", answerSelected );
 	})
 }
-
+/* This is a single point for controlling game timer, start, stop, and pause
+ * are controlled via this function.
+ */
 function timerControl( pAction ) {
     console.log( "Entered timer control, action = '" + pAction + "'" );
 	if ( pAction === "start" ) {
@@ -142,7 +150,9 @@ function timerControl( pAction ) {
         }
 	}
 }
-
+/* When an answer is selected the result is evaluated here
+ * the correct answer is show to the user via the answerColors() call
+ */
 function answerSelected( item ) {
 	timerControl( "stop" );
 	deactivateClicks();
@@ -171,7 +181,9 @@ function answerSelected( item ) {
         setTimeout( setupQuestion, 750 );
     }
 }
-
+/* When a round is over this manages the evaluation and display of the results.
+ * A hidden (z-index = -100, opacity = 0) panel is faded in showing the results.
+ */
 function roundOver() {
     var result;
     console.log( "Round over." );
@@ -194,7 +206,7 @@ function roundOver() {
     roundRight = 0;
     roundWrong = 0;
 }
-
+// This raises or lowers the results pannel
 function pannelControl( pAction ) {
     if ( pAction === "show" ) {
         ptrRoundCard.style.zIndex = 10;
@@ -205,6 +217,7 @@ function pannelControl( pAction ) {
     }
 }
 
+// If the timer runs down to zero this is called
 function questionTimedOut() {
 	timedOut++;
     if ( totalQuestions >= questionsPerRound ) {
@@ -215,6 +228,7 @@ function questionTimedOut() {
     }
 }
 
+// This set up the next question and starts the timer
 function setupQuestion() {
 	var question = nextQuestion();
 	// console.log( question );
@@ -239,6 +253,10 @@ function setupQuestion() {
 	timerControl( "start" );
 }
 
+/*This pulses (enlarges and shrinks) the parent div, it's used everytime the 
+ * "correct" or "wrong" count is incremented to bring the attention of the user 
+ * to the new score values
+ */
 function pulseParent( pPtr ) {
     var ptrParent = pPtr.parentElement;
     console.log( pPtr );
@@ -247,6 +265,7 @@ function pulseParent( pPtr ) {
     setTimeout( function() { ptrParent.style.fontSize = "16pt" }, 100 );
 }
 
+// Dims the wrong answers and changes the right answer to green.
 function answerColors( pAction ) {
     var s1;
     if ( pAction === "show" ) {
@@ -267,6 +286,7 @@ function answerColors( pAction ) {
         Array.from( s1 ).forEach( function( item ) { 
             item.style.opacity = 1;
             item.style.color = "#373737";
+            item.style.cssText = '.answer:hover { color: darkred}';
         });
 
     }

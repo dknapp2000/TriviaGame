@@ -1,11 +1,11 @@
 
 var targetURL = 'https://opentdb.com/api.php?amount=100&difficulty=medium&type=multiple';
-
+// List of question objects are in qlist[]
 var qlist = [];
-
+// usedQuestions tracks what questions have already been used in order to avoid re-use
 var usedQuestions = [];
 
-//loadQuestions();
+// nextQuestion chooses a question and makes sure that it hasn't already been used
 
 function nextQuestion() {
 	for ( var i = 0; i < qlist.length; i++ ) {
@@ -19,10 +19,18 @@ function nextQuestion() {
 	return qlist[qix];
 }
 
+// Reset used questions resets the usedQuestions array
+
 function resetUsedQuestions() {
   unedQuestions = [];
 }
-
+/* loadQuestions makes an ajax call to pull 50 questions from opentdb.com
+ * it then coerces the json objects into the object format that I was using 
+ * for this module prior to switching to ajax. Each new object is pushed onto
+ * into the qlist array.
+ * After all questions are loaded it starts the game by executing the callback
+ * cbSetupQuestions()
+ */
 function loadQuestions( cbSetupQuestion ) {
     console.log( "Ajax call to " + targetURL );	
 
@@ -47,10 +55,3 @@ function loadQuestions( cbSetupQuestion ) {
         cbSetupQuestion();
     });
 }
-/*
-for ( var i = 0; i<qlist.length; i++ ) {
-
-	console.log( nextQuestion() );
-
-}
-*/
