@@ -22,7 +22,7 @@ function nextQuestion() {
 // Reset used questions resets the usedQuestions array
 
 function resetUsedQuestions() {
-  unedQuestions = [];
+  usedQuestions = [];
 }
 /* loadQuestions makes an ajax call to pull 50 questions from opentdb.com
  * it then coerces the json objects into the object format that I was using 
