@@ -33,14 +33,21 @@ var roundWrong = 0;
 var roundsWon = 0;
 var roundsLost = 0;
 
-/* onload grabs the pointers to the DOM objects that we'll be needing. 
- * it also set us the needed event listeners.
- * Finally, it calls out to loadQuestions which loads the
+
+/* onload setups up DOM locators then calls out to 
+ * loadQuestions which loads the
  * questions with an ajax call then starts the game by 
  * calling back to setUpQuestion()
  */
 
 window.onload = function() {
+    getDomPointers();
+	loadQuestions( setupQuestion );
+}
+/* getDomPointers grabs the pointers to the DOM objects that we'll be needing. 
+ * it also set us the needed event listeners.
+ */
+function getDomPointers() {
 	ptrQuestion =  document.getElementById("question");
 	ptrA1 =        document.getElementById("a1");
 	ptrA2 =        document.getElementById("a2");
@@ -62,14 +69,12 @@ window.onload = function() {
     ptrRoundsWon  =  document.getElementById("roundswon");
     ptrRoundsLost =  document.getElementById("roundslost");
     ptrResetGame  =  document.getElementById("restartgame");
-    ptrCategory   =  document.getElementById("category");
+    ptrCategory   =  document.getElementById("category");    
 	ptrPause.addEventListener( "click", function() { timerControl( "pause" ) } );
 	ptrReset.addEventListener( "click", gameReset );
     ptrResetGame.addEventListener("click",gameReset)
     ptrContinueGame  =  document.getElementById("continuegame");
     ptrContinueGame.addEventListener("click", continueGame );
-	loadQuestions( setupQuestion );
-
 }
 
 function pauseTimer() {
@@ -102,7 +107,9 @@ function gameReset() {
 function updateTimer() {
 	if ( ! pauseTimer ) {
 		secondsRemaining--;		
-	}
+	} else {
+        return;
+    }
 	ptrTimer.innerHTML = secondsRemaining;
     if ( secondsRemaining <= 5 ) {
         sndShortBeep.play();

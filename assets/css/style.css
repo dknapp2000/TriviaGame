@@ -26,6 +26,7 @@ body {
     width: 700px;
     margin: auto;
     opacity: 0;
+    -webkit-transition: opacity 0.6s ease;
     transition: opacity 0.6s ease;
 }
 
@@ -48,6 +49,7 @@ body {
 	display: inline-block;
 	margin: auto;
 	width: 23%;
+    -webkit-transition: font 0.1s ease;
     transition: font 0.1s ease;
     line-height: 50px;
 }
@@ -57,7 +59,8 @@ li {
 }
 
 #reset {
-	align-content: center;
+	-ms-flex-line-pack: center;
+	    align-content: center;
 	margin: auto;
 	border-radius: 3px;
 }
